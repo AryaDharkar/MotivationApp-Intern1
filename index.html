@@ -37,35 +37,18 @@
 			</div>
 		</center>
 		<script>
-			let data = [
-				{"message": "The only way to do great work is to love what you do.", "author": "Steve Jobs"},
-				{"message": "Success is not final, failure is not fatal: It is the courage to continue that counts.", "author": "Winston Churchill"},
-				{"message": "Believe you can and you're halfway there.", "author": "Theodore Roosevelt"},
-				{"message": "Don't watch the clock; do what it does. Keep going.", "author": "Sam Levenson"},
-				{"message": "Your time is limited, don't waste it living someone else's life.", "author": "Steve Jobs"},
-				{"message": "The harder you work for something, the greater you'll feel when you achieve it.", "author": "Unknown"},
-				{"message": "Don't stop when you're tired. Stop when you're done.", "author": "Unknown"},
-				{"message": "Dream big and dare to fail.", "author": "Norman Vaughan"},
-				{"message": "Success usually comes to those who are too busy to be looking for it.", "author": "Henry David Thoreau"},
-				{"message": "Opportunities don't happen, you create them.", "author": "Chris Grosser"},
-				{"message": "It always seems impossible until it’s done.", "author": "Nelson Mandela"},
-				{"message": "Hardships often prepare ordinary people for an extraordinary destiny.", "author": "C.S. Lewis"},
-				{"message": "The only limit to our realization of tomorrow is our doubts of today.", "author": "Franklin D. Roosevelt"},
-				{"message": "The way to get started is to quit talking and begin doing.", "author": "Walt Disney"},
-				{"message": "Don’t be afraid to give up the good to go for the great.", "author": "John D. Rockefeller"},
-				{"message": "You don’t have to be great to start, but you have to start to be great.", "author": "Zig Ziglar"},
-				{"message": "Do what you can, with what you have, where you are.", "author": "Theodore Roosevelt"},
-				{"message": "The only person you are destined to become is the person you decide to be.", "author": "Ralph Waldo Emerson"},
-				{"message": "Start where you are. Use what you have. Do what you can.", "author": "Arthur Ashe"}
-			];
-
 			const show = () => {
 				event.preventDefault();
 				let msg = document.getElementById("msg");
 				let author = document.getElementById("author");
-				let rand = parseInt(Math.random() * data.length);
-				msg.innerHTML = data[rand].message;
-				author.innerHTML = "- " + data[rand].author;
+				let url = "https://quotes-api-self.vercel.app/quote";
+				fetch(url)
+				.then (res=>res.json())
+				.then (data=>{
+					msg.innerHTML=data.quote;
+					author.innerHTML= data.author;
+				})
+				.catch(err=>alert("issue: "+err));
 
 				let box = document.getElementById("box");
 				box.style.maxHeight = '500px'; // Expand container height
